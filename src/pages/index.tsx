@@ -27,7 +27,7 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const {play} = useContext(PlayerContext);
+  const { play } = useContext(PlayerContext);
 
   return (
     <>
@@ -93,7 +93,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <td>{ep.publishedAt}</td>
                   <td>{ep.durationString}</td>
                   <td>
-                    <button><img src="/play-green.svg" alt="tocar" /></button>
+                    <button type="button" onClick={() => play(ep)}>
+                      <img src="/play-green.svg" alt="tocar" />
+                    </button>
                   </td>
                 </tr>
               ))}

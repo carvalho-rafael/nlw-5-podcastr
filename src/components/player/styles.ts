@@ -24,6 +24,29 @@ export const PlayerContainer = styled.header`
     }
 `
 
+export const CurrentEpisode = styled.div`
+    text-align: center;
+
+    img {
+        border-radius: 1.5rem;
+    }
+
+    strong {
+        display: block;
+        margin-top: 2rem;
+        font-size: 1.25rem;
+        line-height: 1.4rem;
+    }
+
+    span {
+        display: block;
+        margin-top: 1rem;
+        opacity: .6;
+        line-height: 1.5rem;
+    }
+
+`
+
 export const EmptyPlayer = styled.div`
     width: 100%;
     height: 20rem;
@@ -53,29 +76,34 @@ export const Progress = styled.div`
     }
 `
 
-export const Slider = styled.div`
+export const SliderContainer = styled.div`
     flex: 1;
-
-    div {
-        width: 100%;
-        height: 4px;
-        background: var(--purple-300);
-        border-radius: 2px;
-    }
+`
+export const EmptySlider = styled.div`
+    width: 100%;
+    height: 4px;
+    background: var(--purple-300);
+    border-radius: 2px;
 `
 
 
-export const Buttons = styled.div`
+export const Buttons = styled.div<{empty: boolean}>`
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 2.5rem;
     gap: 1.5rem;
 
+    opacity: ${props => props.empty ? '.6': '1'};
+
     button {
         background: transparent;
         border: 0;
         font-size: 0;
+
+        &:disabled {
+            cursor: default;
+        }
     }
 `
 
@@ -83,5 +111,5 @@ export const PlayButton = styled.button`
     width: 4rem;
     height: 4rem;
     border-radius: 1rem;
-    background: var(--purple-400)
+    background: var(--purple-300)!important;
 `

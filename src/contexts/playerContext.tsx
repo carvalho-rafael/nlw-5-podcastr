@@ -1,8 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
-/* import Cookies from 'js-cookie';
 
-import challenges from '../challenges.json';
- */
 type Episode = {
     id: string
     title: string
@@ -14,35 +11,48 @@ type Episode = {
 
 type PlayerContextData = {
     episodeList: Episode[],
-    currentEpisodeIndex: number
-    play: (Episode) => void
+    currentEpisodeIndex: number,
+    playing: boolean,
+    play: (Episode) => void,
+    togglePlay: () => void,
+    setPlayingState: (boolean) => void
 }
 
 
 export const PlayerContext = createContext({} as PlayerContextData);
 
 export function PlayerProvider({children}) {
-    const [episodeList, setEpisodeList] = useState<Episode[]>();
-    const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(1);
+    const [episodeList, setEpisodeList] = useState<Episode[]>([]);
+    const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
+    const [playing, setPlaying] = useState(false);
 
     function play(episode) {
         setEpisodeList([episode]);
         setCurrentEpisodeIndex(0);
+        setPlaying(true);
     }
 
-    useEffect(() => {
-        Notification.requestPermission();
-    }, [])
+
+    function togglePlay() {
+        setPlaying(value => !value);
+    }
+
+    function setPlayingState(state: boolean) {
+        setPlaying(state);
+    }
 
     return (
         <PlayerContext.Provider
             value={{
                 episodeList,
                 currentEpisodeIndex,
-                play
+                playing,
+                play,
+                togglePlay,
+                setPlayingState
             }}
         >
-            {...children}
+            {children}
         </PlayerContext.Provider>
     )
 }
