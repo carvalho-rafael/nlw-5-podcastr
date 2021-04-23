@@ -87,14 +87,14 @@ export const EmptySlider = styled.div`
 `
 
 
-export const Buttons = styled.div<{empty: boolean}>`
+export const Buttons = styled.div<{ empty: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 2.5rem;
     gap: 1.5rem;
 
-    opacity: ${props => props.empty ? '.6': '1'};
+    opacity: ${props => props.empty ? '.6' : '1'};
 
     button {
         background: transparent;
@@ -113,4 +113,20 @@ export const PlayButton = styled.button`
     height: 4rem;
     border-radius: 1rem;
     background: var(--purple-300)!important;
+`
+
+export const RepeatButton = styled.button<{ active: boolean }>`
+    filter: ${props => props.active ? 'invert(0.35) sepia(1) saturate(3) hue-rotate(100deg)' : ''};
+
+    &:hover {
+        filter: brightness(0.6) invert(0.35) saturate(3) hue-rotate(100deg);
+    }
+`
+
+export const ShuffleButton = styled.button<{ active: boolean }>`
+    filter: ${props => props.active ? 'invert(0.35) sepia(1) saturate(3) hue-rotate(100deg)' : ''};
+
+    &:hover {
+        filter: brightness(0.6) invert(0.35) saturate(3) hue-rotate(100deg);
+    }
 `
