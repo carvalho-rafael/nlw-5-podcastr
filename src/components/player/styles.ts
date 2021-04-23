@@ -103,6 +103,7 @@ export const Buttons = styled.div<{empty: boolean}>`
 
         &:disabled {
             cursor: default;
+            opacity: .5;
         }
     }
 `

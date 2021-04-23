@@ -9,6 +9,8 @@ import { convertDurationToString } from '../../utils/convertDurationToString';
 
 import Image from 'next/image'
 import Link from 'next/link';
+import { useContext } from 'react';
+import { PlayerContext } from '../../contexts/playerContext';
 
 type Episode = {
     id: string
@@ -30,6 +32,8 @@ export default function Episode({ episode }: EpisodeProps) {
     const router = useRouter();
     const { slug } = router.query;
 
+    const { play } = useContext(PlayerContext);
+
     return (
         <>
             <Head>
@@ -48,7 +52,7 @@ export default function Episode({ episode }: EpisodeProps) {
                         src={episode.thumbnail}
                         objectFit="cover"
                     />
-                    <button type="button">
+                    <button type="button" onClick={() => play(episode)}>
                         <img src="/play.svg" alt="tocar" />
                     </button>
                 </EpisodeCover>
@@ -89,10 +93,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export const getStaticPaths: GetStaticPaths = async () => {
     const { data } = await api.get(`episodes`);
 
-    const episodesPaths = data.map(ep =>{
+    const episodesPaths = data.map(ep => {
         return {
             params: {
-                slug:  ep.id
+                slug: ep.id
             }
         }
     })
